@@ -26,8 +26,11 @@ Auth::routes();
 Route::get('/login', 'HomeController@index')->name('login');
 Route::get('/inbox', 'InboxController@index')->name('inbox');
 Route::get('/usuario','UsuarioController@index')->name('usuario');
+Route::get('usuario/{id}/delete', 
+['uses' => 'UsuarioController@destroy',
+ 'as' => 'usuario.delete']);
 
-
+Route::resource('Usuario','UsuarioController');
 
 Auth::routes();
 

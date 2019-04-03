@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Flash;
 
 class UsuarioController extends Controller
 {
@@ -37,7 +38,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
     }
 
     /**
@@ -82,6 +83,9 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        
+        return redirect(route('usuario'));
+        
     }
 }

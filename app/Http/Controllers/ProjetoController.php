@@ -14,6 +14,7 @@ class ProjetoController extends Controller
     public function index()
     {
         return view('/projeto');
+        
     }
 
     /**

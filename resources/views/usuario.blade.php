@@ -1,24 +1,33 @@
 @extends('layouts.app')
 
 @section('css')
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lista de Usuarios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+    <script>$(document).ready(function() {
+    $('#example').DataTable();
+} );</script>
+
+
+@endsection
+
+@section('scripts')
+<script>$(document).ready(function() {
+    $('#example').DataTable();
+} );</script>
+
+@endsection
+
 
 
 
 @section('content')
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lista de Usuarios</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
-</head>
-<body>
 
-<div class="col-xs-12">
+ <div class="col-xs-12">
           <div class="box">
           <a href="{{route('home')}}" type="submit" class="btn btn-primary"><i class="fa fa-arrow-left"></i> voltar</a>
             <div class="box-header">
@@ -33,32 +42,58 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-header -->
+            
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tbody><tr>
+              <table id="example" class="table table-hover" >
+                <tbody>
+                <tr>
                   <th></th>
                   <th>Nome</th>
                   <th>Sobrenome</th>
                   <th>Email</th>
+                  <th>Cargo</th>
                 </tr>
                 @foreach($users as $user)
     <tr>
     
-      <th scope="row">{{{$user->id}}}</th>
+      <td >{{{$user->id}}}</td>
       <td>{{$user->name}}</td>
       <td>{{$user->sobrenome}}</td>
       <td>{{$user->email}}</td>
-      @endforeach
-    </tr>
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+      <td>{{$user->cargo}}</td>
+      <td>
+        <div class="tools">
+
+        <button type="submit" class="btn btn-primary "><i class="fa fa-pencil-square-o"></i>  Editar</button>
+            <a href="{{route('usuario.delete', $user->id)}}?{{time()}}" onclick="return confirm('Deseja excluir esse usuário?')">
+            <button type="submit" class="btn btn-danger "><i class="fa fa-trash"></i>  Excluir</button>
+            <!-- <i class="fa fa-trash" style="font-size:28px;color:red"></i> -->
+            
+
+          </a>        
         </div>
 
-</body>
-</html>
+        
+      </td>
+    
+      
+    </tr>
+  
+      @endforeach
+      <script>
+    $(".delete").on("submit", function(){
+        return confirm("Are you sure?");
+    });
+    </script>
+      </tr>
+              </tbody>
+            </table>
+            </div>
+            
+          </div>
+          
+        </div>
+
+       
 
 @endsection
